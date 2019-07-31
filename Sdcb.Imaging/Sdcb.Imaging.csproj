@@ -4,11 +4,22 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Direct2D based watermark/captcha tool.</Description>
+    <Version>1.1.0</Version>
+    <PackageProjectUrl>https://github.com/sdcb/Sdcb.Imaging</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sdcb/Sdcb.Imaging</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="SharpDX.Direct2D1" Version="4.2.0" />
     <PackageReference Include="SharpDX.Mathematics" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
