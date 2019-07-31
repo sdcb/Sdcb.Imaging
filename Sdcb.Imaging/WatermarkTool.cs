@@ -10,7 +10,7 @@ namespace Sdcb.Imaging
     {
         public const int TransparentWhite = 0x7FFFFFFF;
 
-        public static void WatermarkText(Stream imageStream, Stream outputStream, string watermark, string font = "微软雅黑", float fontSize = 30.0f, int colorARGB = TransparentWhite)
+        public static void WatermarkText(Stream imageStream, Stream outputStream, string watermark, string font = "Times New Roman", float fontSize = 30.0f, int colorARGB = TransparentWhite)
         {
             using (var wic = new WIC.ImagingFactory2())
             using (var d2d = new D2D.Factory())
@@ -38,11 +38,11 @@ namespace Sdcb.Imaging
             }
         }
 
-        public static MemoryStream WatermarkText(Stream imageStream, string watermark, string font = "微软雅黑", float fontSize = 30.0f, int colorARGB = TransparentWhite)
+        public static byte[] WatermarkText(Stream imageStream, string watermark, string font = "Times New Roman", float fontSize = 30.0f, int colorARGB = TransparentWhite)
         {
             var ms = new MemoryStream();
             WatermarkText(imageStream, ms, watermark, font, fontSize, colorARGB);
-            return ms;
+            return ms.ToArray();
         }
 
         private static void SaveD2DBitmap(WIC.ImagingFactory2 wic, WIC.Bitmap wicBitmap, Stream outputStream)

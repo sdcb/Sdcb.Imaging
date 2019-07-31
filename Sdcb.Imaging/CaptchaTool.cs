@@ -9,7 +9,12 @@ namespace Sdcb.Imaging
 {
     public static class CaptchaTool
     {
-        public static byte[] CreateTextCaptchaPngImage(int width, int height, string text)
+        public static byte[] CreatePngImage(int width, int height, string text, 
+            float fontSize = 30.0f, 
+            string font = "Times New Roman", 
+            int lineCount = 5, 
+            bool rotation = false, 
+            float turbulenceAmount = 60.0f)
         {
             using (var wic = new WIC.ImagingFactory2())
             using (var d2d = new D2D.Factory())
@@ -34,10 +39,7 @@ namespace Sdcb.Imaging
                 {
                     dc.Target = bmpLayer;
                     dc.BeginDraw();
-                    var textFormat = new DWrite.TextFormat(dwriteFactory, "Times New Roman",
-                        DWrite.FontWeight.Bold,
-                        DWrite.FontStyle.Normal,
-                        width / text.Length);
+                    var textFormat = new DWrite.TextFormat(dwriteFactory, font, fontSize);
                     for (int charIndex = 0; charIndex < text.Length; ++charIndex)
                     {
                         using (var layout = new DWrite.TextLayout(dwriteFactory, text[charIndex].ToString(), textFormat, float.MaxValue, float.MaxValue))
@@ -57,13 +59,13 @@ namespace Sdcb.Imaging
                                 dc.Transform =
                                     Matrix3x2.Translation(-layoutSize / 2) *
                                     Matrix3x2.Skew(r.NextFloat(0, 0.5f), r.NextFloat(0, 0.5f)) *
-                                    //Matrix3x2.Rotation(r.NextFloat(0, MathF.PI * 2)) *
+                                    (rotation ? Matrix3x2.Rotation(r.NextFloat(0, (float)(Math.PI * 2))) : Matrix3x2.Identity) *
                                     Matrix3x2.Translation(position + layoutSize / 2);
                                 dc.DrawTextLayout(Vector2.Zero, layout, b2);
                             }
                         }
                     }
-                    for (var i = 0; i < 4; ++i)
+                    for (var i = 0; i < lineCount; ++i)
                     {
                         target.Transform = Matrix3x2.Identity;
                         brush.Color = ColorFromHsl(r.NextFloat(0, 1), 1.0f, 0.3f);
@@ -81,7 +83,7 @@ namespace Sdcb.Imaging
                     using (var displacement = new D2D.Effects.DisplacementMap(dc))
                     {
                         displacement.SetInput(0, bmpLayer, true);
-                        displacement.Scale = 100.0f;
+                        displacement.Scale = turbulenceAmount;
 
                         var turbulence = new D2D.Effects.Turbulence(dc);
                         displacement.SetInputEffect(1, turbulence);

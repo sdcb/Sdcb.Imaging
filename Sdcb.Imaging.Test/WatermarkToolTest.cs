@@ -9,23 +9,28 @@ namespace Sdcb.Imaging.Test
         [Fact]
         public void Test1()
         {
-            WatermarkTool.WatermarkText(File.OpenRead(@"D:\_\WatermarkDemo.png"), File.OpenWrite(@"D:\_\Demo2.png"), "Ë®Ó¡ÔÚ´Ë", 
-                font: "Î¢ÈíÑÅºÚ", 
-                fontSize: 30, 
-                colorARGB: 0x7f_FF_FF_FF);
+            using (var imageStream = File.OpenRead(@"..\..\..\..\sample-images\src.png"))
+            using (var outputStream = File.OpenWrite(@"..\..\..\..\sample-images\watermark-test1.png"))
+            {
+                WatermarkTool.WatermarkText(
+                    imageStream, outputStream,
+                    watermark: "Watermark here",
+                    font: "Times New Roman",
+                    fontSize: 30,
+                    colorARGB: 0x7f_FF_FF_FF); // transparent white
+            }
         }
 
         [Fact]
         public void Test2()
         {
-            var ms = WatermarkTool.WatermarkText(File.OpenRead(@"D:\_\WatermarkDemo.png"), "Ë®Ó¡ÔÚ´Ë",
-                font: "Î¢ÈíÑÅºÚ",
-                fontSize: 30,
-                colorARGB: 0x7f_FF_FF_FF);
-            using (var file = File.OpenWrite(@"D:\_\Demo2.png"))
-            {
-                ms.CopyTo(file);
-            }
+            var bytes = WatermarkTool.WatermarkText(
+                imageStream: File.OpenRead(@"..\..\..\..\sample-images\src.png"), 
+                watermark:  "Watermark here",
+                font:       "Times New Roman",
+                fontSize:    30,
+                colorARGB:   0x7f_FF_FF_FF); // transparent white
+            File.WriteAllBytes(@"..\..\..\..\sample-images\watermark-test2.png", bytes);
         }
     }
 }
