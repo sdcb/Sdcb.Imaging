@@ -45,7 +45,7 @@ Generated example:
 # Release Notes:
 
 ## 1.2.0
-Add ImageFormats support in WatermarkTool, supported ImageFormats:
+Add `ImageFormats` support in WatermarkTool, supported ImageFormats:
 ```csharp
 public enum ImageFormats
 {
