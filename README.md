@@ -1,42 +1,6 @@
 # Sdcb.Imaging [![NuGet](https://img.shields.io/badge/nuget-1.2.0-blue.svg)](https://www.nuget.org/packages/Sdcb.Imaging)
 Direct2D based watermark/captcha tool.
 
-# Release Notes:
-
-## 1.2.0
-Add ImageFormats support in WatermarkTool, supported ImageFormats:
-```csharp
-public enum ImageFormats
-{
-    Bmp,
-    Png,
-    Ico,
-    Jpeg,
-    Tiff,
-    Gif,
-    Wmp,
-    Dds,
-    Adng,
-}
-```
-
-Example: 
-```csharp
-var bytes = WatermarkTool.WatermarkText(
-    imageStream: File.OpenRead(@"..\..\..\..\sample-images\src.jpg"),
-    watermark: "Watermark here",
-    srcImageFormat: ImageFormats.Jpeg, // read imageStream as jpeg format.
-    destImageFormat: null,             // (optional) same format as src, can be specified,
-    font: "Times New Roman",
-    fontSize: 30,
-    colorARGB: 0x7f_FF_FF_FF); // transparent white
-File.WriteAllBytes(@"..\..\..\..\sample-images\watermark-dest.jpg", bytes);
-```
-
-## 1.1.0
-Initial Version.
-```
-
 # Watermark usage
 ```csharp
 using (var imageStream = File.OpenRead(@"..\..\..\..\sample-images\src.png"))
@@ -77,3 +41,38 @@ File.WriteAllBytes(
 Generated example:
 
 ![captcha-test1.png](./sample-images/captcha-test1.png)
+
+# Release Notes:
+
+## 1.2.0
+Add ImageFormats support in WatermarkTool, supported ImageFormats:
+```csharp
+public enum ImageFormats
+{
+    Bmp,
+    Png,
+    Ico,
+    Jpeg,
+    Tiff,
+    Gif,
+    Wmp,
+    Dds,
+    Adng,
+}
+```
+
+Example: 
+```csharp
+var bytes = WatermarkTool.WatermarkText(
+    imageStream: File.OpenRead(@"..\..\..\..\sample-images\src.jpg"),
+    watermark: "Watermark here",
+    srcImageFormat: ImageFormats.Jpeg, // read imageStream as jpeg format.
+    destImageFormat: null,             // (optional) same format as src, can be specified,
+    font: "Times New Roman",
+    fontSize: 30,
+    colorARGB: 0x7f_FF_FF_FF); // transparent white
+File.WriteAllBytes(@"..\..\..\..\sample-images\watermark-dest.jpg", bytes);
+```
+
+## 1.1.0
+Initial Version.
