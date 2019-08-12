@@ -41,7 +41,8 @@ namespace Sdcb.Imaging.Test
             var bytes = WatermarkTool.WatermarkText(
                 imageStream: File.OpenRead(@"..\..\..\..\sample-images\src.jpg"),
                 watermark: "Watermark here",
-                srcImageFormat: ImageFormats.Jpeg,
+                srcImageFormat: ImageFormats.Jpeg, // read imageStream as jpeg format.
+                destImageFormat: null,             // (optional) same format as src, can be specified, 
                 font: "Times New Roman",
                 fontSize: 30,
                 colorARGB: 0x7f_FF_FF_FF); // transparent white
