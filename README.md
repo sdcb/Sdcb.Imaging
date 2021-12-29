@@ -1,4 +1,4 @@
-# Sdcb.Imaging [![NuGet](https://img.shields.io/badge/nuget-1.2.0-blue.svg)](https://www.nuget.org/packages/Sdcb.Imaging)
+# Sdcb.Imaging [![NuGet](https://img.shields.io/badge/nuget-1.2.0-blue.svg)](https://www.nuget.org/packages/Sdcb.Imaging) [![QQ](https://img.shields.io/badge/QQ_Group-579060605-52B6EF?style=social&logo=tencent-qq&logoColor=000&logoWidth=20)](https://jq.qq.com/?_wv=1027&k=K4fBqpyQ)
 Direct2D based watermark/captcha tool.
 
 # Watermark usage
